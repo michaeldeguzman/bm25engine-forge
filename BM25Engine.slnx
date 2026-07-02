@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BM25Engine/BM25Engine.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BM25Engine.Tests/BM25Engine.Tests.csproj" />
+  </Folder>
+</Solution>
