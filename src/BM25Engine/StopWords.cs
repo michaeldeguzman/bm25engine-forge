@@ -7,6 +7,7 @@ namespace BM25Engine;
 /// </summary>
 public static class StopWords
 {
+    /// <summary>The English stop word set. Ordinal comparison, all lowercase.</summary>
     public static readonly HashSet<string> English = new(StringComparer.Ordinal)
     {
         "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any",
