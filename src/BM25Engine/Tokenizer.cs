@@ -25,6 +25,8 @@ public static class Tokenizer
         {
             if (char.IsLetterOrDigit(c) || char.IsWhiteSpace(c))
                 stripped.Append(c);
+            else
+                stripped.Append(' ');
         }
 
         var rawTokens = stripped.ToString()
