@@ -33,7 +33,7 @@ public class BM25ScorerTests
     //   invalid: f=3, term = 0.6931471805599453 * (3*2.2) / (3+1.2*1.0) = 1.089231283737057
     //   chunk3 total = 1.089231283737057
     //
-    // (Values computed via `python3 -c "import math; ..."` — reproduce with the same
+    // (Values computed via `python3 -c "import math; ..."`. Reproduce with the same
     // computation if these ever need re-deriving.)
     [Fact]
     public void Score_HandCalculatedExample_MatchesExpectedScores()

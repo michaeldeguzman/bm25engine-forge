@@ -3,7 +3,7 @@ namespace BM25Engine;
 /// <summary>
 /// Implements the Porter Stemming Algorithm (M. F. Porter, 1980, "An algorithm for suffix stripping").
 /// Ported from Porter's own reference implementation structure. Input is assumed to already be
-/// lowercase, alphabetic-only text — lowercasing and punctuation stripping are Tokenizer's
+/// lowercase, alphabetic-only text. Lowercasing and punctuation stripping are Tokenizer's
 /// responsibility, not this class's.
 /// </summary>
 public static class PorterStemmer

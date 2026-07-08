@@ -9,10 +9,10 @@ namespace BM25Engine;
 public interface IBM25EngineActions
 {
     [OSAction(
-        Description = "Lowercases, strips punctuation, removes stop words, and Porter-stems the input text. Must be called with identical logic at both ingestion time (indexing a chunk) and query time (parsing a search query) so terms actually match — never fork this logic.",
+        Description = "Lowercases, strips punctuation, removes stop words, and Porter-stems the input text. Must be called with identical logic at both ingestion time (indexing a chunk) and query time (parsing a search query) so terms actually match. Never fork this logic.",
         ReturnName = "Tokens")]
     List<string> TokenizeText(
-        [OSParameter(Description = "The text to tokenize — a document chunk at ingestion time, or a search query at query time.")]
+        [OSParameter(Description = "The text to tokenize: a document chunk at ingestion time, or a search query at query time.")]
         string text);
 
     [OSAction(
@@ -26,7 +26,7 @@ public interface IBM25EngineActions
         Description = "Scores a set of candidate chunks against a query using BM25. ODC tokenizes the query via TokenizeText, looks up matching BM25Posting/BM25Term rows for those query terms, and passes the resulting candidate postings plus corpus stats from BM25Stats and tuning parameters from Site Properties (K1, B) into this method. Returns all scored chunks ranked descending by score.",
         ReturnName = "Results")]
     List<BM25ScoreResult> ScoreQuery(
-        [OSParameter(Description = "The tokenized, stemmed query terms — the output of TokenizeText run on the user's search query.")]
+        [OSParameter(Description = "The tokenized, stemmed query terms: the output of TokenizeText run on the user's search query.")]
         List<string> queryTerms,
         [OSParameter(Description = "Candidate (term, chunk) postings for every chunk that matches at least one query term.")]
         List<PostingCandidate> postings,

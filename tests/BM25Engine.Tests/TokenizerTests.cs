@@ -34,7 +34,7 @@ public class TokenizerTests
     public void Tokenize_PunctuationHeavy_StripsPunctuationAndFusesTokens_v1_deprecated()
     {
         // "ORA-01400" -> hyphen stripped (deleted, not replaced) -> "ora01400" as a single fused
-        // alphanumeric token. This was the documented v1 behavior — exact codes weren't preserved
+        // alphanumeric token. This was the documented v1 behavior. Exact codes weren't preserved
         // as distinct match targets. Deprecated: this fusion is what caused the ERR-BM25-003
         // retrieval anomaly (query token never matched a differently-fused indexed token).
         var result = Tokenizer.Tokenize("Error: ORA-01400, can't insert NULL!");
@@ -64,7 +64,7 @@ public class TokenizerTests
     {
         // v2 regression coverage for the queries that surfaced the ERR-BM25-003 anomaly.
         // Hyphens now split ("v1-stemmed-porter" -> "v1", "stem", "porter") the same way
-        // colons and periods do — there is no special-casing for any one punctuation mark.
+        // colons and periods do. There is no special-casing for any one punctuation mark.
         var result = Tokenizer.Tokenize(input);
         Assert.Equal(expected, result);
     }
@@ -73,7 +73,7 @@ public class TokenizerTests
     public void Tokenize_Chunk68_SplitsErrBm25003IntoSeparateTokens()
     {
         // Chunk 68 is missing whitespace after several sentence-ending periods (a PDF-extraction
-        // artifact — e.g. "...on retry.ERR-BM25-003..."). Under v1 this fused into
+        // artifact, e.g. "...on retry.ERR-BM25-003..."). Under v1 this fused into
         // "retryerrbm25003", which never matched the query token "errbm25003". Under v2 the
         // period is now a boundary too, so "err", "bm25", "003" tokenize the same regardless of
         // adjacent whitespace being present in the source text.
@@ -145,7 +145,7 @@ public class TokenizerTests
 
     // Real chunk text from the ODC RAG Pipeline Technical Reference document that surfaced the
     // ERR-BM25-003 retrieval anomaly (see tests/bm25_anomaly_test_data.json). Copied verbatim,
-    // including the missing whitespace after several periods — that missing whitespace is what
+    // including the missing whitespace after several periods. That missing whitespace is what
     // caused the v1 fusion bug this test suite now guards against.
     private const string Chunk68Text =
         "Error Reference and TroubleshootingBM25Engine Ingestion ErrorsThe following error codes " +

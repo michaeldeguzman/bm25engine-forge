@@ -4,20 +4,20 @@ namespace BM25Engine;
 
 /// <summary>
 /// Public entry points exposed as ODC Server Actions via the OutSystems External Logic SDK.
-/// Stateless — every method takes all data it needs as parameters and returns a complete result.
+/// Stateless. Every method takes all data it needs as parameters and returns a complete result.
 /// </summary>
 public static class BM25EngineLibrary
 {
     /// <summary>
-    /// Tokenizes, removes stop words, and stems the input text. Used identically at ingestion
-    /// time (indexing a chunk) and query time (parsing a search query), guaranteeing consistent
+    /// Tokenizes, removes stop words, and stems the input text. Runs identically at ingestion
+    /// time, indexing a chunk, and query time, parsing a search query. Guarantees consistent
     /// term matching between the two paths.
     /// </summary>
     public static List<string> TokenizeText(string text) => Tokenizer.Tokenize(text);
 
     /// <summary>
-    /// Indexes a single chunk of text: tokenizes it and returns the token count plus per-term
-    /// frequencies needed to build BM25Posting and BM25Term rows in ODC. Stateless — call once
+    /// Indexes a single chunk of text. Tokenizes it and returns the token count plus per-term
+    /// frequencies needed to build BM25Posting and BM25Term rows in ODC. Stateless. Call once
     /// per chunk during ingestion or backfill.
     /// </summary>
     public static ChunkIndexResult IndexChunk(string chunkText)

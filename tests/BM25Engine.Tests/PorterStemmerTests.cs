@@ -6,7 +6,7 @@ public class PorterStemmerTests
     // (e.g. the step-2 table shows "radicalli -> radical" as *just* the ALLI->AL substitution).
     // Running the full six-step pipeline on that same surface form can cascade into later steps
     // (e.g. "radical" also ends in "ical", so step 4/paper-step-3 further reduces it to "radic").
-    // Expected values below are the verified full-pipeline output — cross-checked against
+    // Expected values below are the verified full-pipeline output, cross-checked against
     // Porter's own official reference vocabulary (tartarus.org/martin/PorterStemmer/voc.txt +
     // output.txt) wherever a pair also appears there (e.g. troubled->troubl, agreed->agre,
     // rational->ration all match the official reference exactly), and hand-traced through

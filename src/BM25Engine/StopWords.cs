@@ -1,9 +1,9 @@
 namespace BM25Engine;
 
 /// <summary>
-/// Standard English stop word list for lexical search indexing. Deliberately conservative —
-/// this indexes technical documentation, so short technical tokens and connective words that
-/// could carry query meaning are not treated as stop words.
+/// Standard English stop word list for lexical search indexing. Deliberately conservative,
+/// because this indexes technical documentation. Short technical tokens and connective words
+/// that could carry query meaning are not treated as stop words.
 /// </summary>
 public static class StopWords
 {

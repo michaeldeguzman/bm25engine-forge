@@ -3,15 +3,16 @@ using System.Text;
 namespace BM25Engine;
 
 /// <summary>
-/// Tokenizes free text into stemmed terms for BM25 indexing and querying. This exact pipeline
-/// must run identically at ingestion time and query time — that identity is what guarantees
-/// ingestion and query terms actually match. Never fork this logic.
+/// Tokenizes free text into stemmed terms for BM25 indexing and querying. This pipeline must
+/// run identically at ingestion time and query time. That identity guarantees ingestion and
+/// query terms match. Never fork this logic.
 /// </summary>
 public static class Tokenizer
 {
     /// <summary>
-    /// Lowercases, strips punctuation, removes stop words, and Porter-stems the input text.
-    /// Duplicates are preserved — frequency counting is the caller's responsibility.
+    /// Tokenizes raw text into stemmed tokens. Lowercases, strips punctuation, removes stop
+    /// words, and Porter-stems the input, then returns the resulting token list. Duplicates are
+    /// preserved; frequency counting is the caller's responsibility.
     /// </summary>
     public static List<string> Tokenize(string text)
     {
