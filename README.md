@@ -33,6 +33,27 @@ Computes BM25 scores for a candidate set ODC already fetched from `BM25Posting`/
 corpus stats from `BM25Stats` and tuning parameters from Site Properties (K1, B). Returns results
 sorted descending by score. `topK` is optional; `null` returns every scored chunk.
 
+## Tokenizer versioning
+
+**v2 (current):** stripped punctuation is replaced with a whitespace boundary, so it always
+splits adjacent alphanumeric runs into separate tokens — hyphens, colons, periods, etc. are
+all treated identically. `ERR-BM25-003` tokenizes to `err`, `bm25`, `003` instead of fusing
+into one token.
+
+**v1 (deprecated):** stripped punctuation was deleted instead of replaced, so tokens with no
+surrounding whitespace in the source text could fuse across word boundaries — e.g.
+`retry.ERR-BM25-003` (no space before the code) tokenized to `retryerrbm25003`, a token that
+could never match a clean query for `ERR-BM25-003`. This was a real, reproducible retrieval bug,
+not a documentation footnote.
+
+**Upgrading from v1 to v2 requires a full reindex of your corpus.** v1 and v2 postings for the
+same source text use different token boundaries and are not compatible — run a full backfill,
+not a partial/incremental one.
+
+Known v2 side effect: contractions now split at the apostrophe (`don't` → `don`, `t`). Neither
+fragment matches a stop-word entry (the stop list has whole contracted forms like `"don't"`),
+so short fragments pass through as low-value index noise. Accepted tradeoff, not fixed.
+
 ## Project layout
 
 ```
@@ -52,7 +73,8 @@ verified via `Assembly.GetReferencedAssemblies()` after a Release build.
   sourced from Porter's own official reference vocabulary
   (`tartarus.org/martin/PorterStemmer/voc.txt` + `output.txt`).
 - `tests/BM25Engine.Tests/TokenizerTests.cs` — empty input, all-stop-word input, mixed case,
-  punctuation-heavy input, realistic paragraph.
+  punctuation-heavy input, realistic paragraph, v2 split-on-punctuation behavior. The deprecated
+  v1 fused-token test is kept (renamed, marked `Skip`) rather than deleted, for audit history.
 - `tests/BM25Engine.Tests/BM25ScorerTests.cs` — hand-calculated 3-chunk / 2-query-term example
   verified to 1e-6 tolerance.
 
