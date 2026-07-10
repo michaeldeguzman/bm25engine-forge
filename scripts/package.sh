@@ -11,7 +11,7 @@ cd "$(dirname "$0")/.."
 
 dotnet build src/BM25Engine/BM25Engine.csproj -c Release
 
-BUILD_DIR="src/BM25Engine/bin/Release/net8.0"
+BUILD_DIR="src/BM25Engine/bin/Release/net10.0"
 OUT_DIR="publish"
 ZIP_PATH="$OUT_DIR/BM25Engine.zip"
 
