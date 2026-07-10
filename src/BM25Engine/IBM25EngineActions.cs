@@ -5,7 +5,8 @@ namespace BM25Engine;
 
 [OSInterface(
     Name = "BM25Engine",
-    Description = "Native BM25 lexical search scoring for OutSystems Developer Cloud (ODC): tokenization, Porter stemming, and BM25 ranking math, with zero external dependencies.")]
+    Description = "Native BM25 lexical search scoring for OutSystems Developer Cloud (ODC): tokenization, Porter stemming, and BM25 ranking math, with zero external dependencies.",
+    IconResourceName = "BM25Engine.BM25Logo.png")]
 public interface IBM25EngineActions
 {
     [OSAction(

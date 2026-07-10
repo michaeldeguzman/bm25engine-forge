@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="BM25Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OutSystems.ExternalLibraries.SDK" Version="1.5.0" />
   </ItemGroup>
 
